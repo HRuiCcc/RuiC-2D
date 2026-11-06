@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![在线体验](https://img.shields.io/badge/Online_Demo-立即体验-7ea7ff?logo=googlechrome&logoColor=white)](https://hruiccc.github.io/RuiC-2D/demo/)
 
 > 从一张图，到一个会眨眼、会说话、能上直播的 2D 角色。
 
@@ -11,6 +12,8 @@ RuiC-2D 是一个**本地运行的 2D 虚拟形象编辑器**。导入一张正�
 不需要 PSD，不需要建模，不需要把素材上传到云端。工程、模型推理和导出都在本机完成。
 
 A local-first 2D avatar editor that turns one illustration into a riggable character — layered parts, mesh deformation, lip-sync, timeline animation and live tracking, all on your own machine.
+
+> **在线体验**：不想安装环境？直接打开 [大肥鱼1号在线体验页](https://hruiccc.github.io/RuiC-2D/demo/)，听她做自我介绍，试试眨眼、转头和摆尾。
 
 ![RuiC-2D 编辑器](docs/editor.png)
 
