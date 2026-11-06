@@ -28,6 +28,16 @@ A local-first 2D avatar editor that turns one illustration into a riggable chara
 - **可编辑**：`.yxavatar` 保留原图、分层、绑定、动作、配音和播放器，导出后还能重新打开继续改。
 - **可降级**：没有 AI 生图也能用。闭眼、半闭眼、A / 半 A / I / O 嘴型可以本地绘制补齐。
 
+## 赞赏支持
+
+如果这个项目帮到了你，欢迎请我喝杯咖啡 ☕
+
+<div align="center">
+  <img src="assets/wechat-donate.png" width="300" alt="微信赞赏码" />
+  <p><strong>微信扫码赞赏</strong></p>
+  <p>微号：<strong>hrc_rch</strong>（说明来意）</p>
+</div>
+
 ## 核心能力
 
 - **单图成角色**：导入一张正面立绘，本地完成人像分割与五官分层；识别失败时可手动补点。
@@ -180,16 +190,6 @@ assets/             品牌与赞赏素材
 
 **可以商用吗？**
 代码是 MIT。示例角色「大肥鱼1号」的立绘、差分和配音由作者保留，二次开发请替换成自己的素材；商用或再分发角色素材请先取得授权。
-
-## 赞赏支持
-
-如果这个项目帮到了你，欢迎请我喝杯咖啡 ☕
-
-<div align="center">
-  <img src="assets/wechat-donate.png" width="300" alt="微信赞赏码" />
-  <br>
-  <sub>微信扫码赞赏</sub>
-</div>
 
 ## 开源协议
 
