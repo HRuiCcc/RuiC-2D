@@ -1,0 +1,342 @@
+{
+  "version": 1,
+  "name": "大肥鱼1号 · 原图生图实测",
+  "ready": true,
+  "updated": 1793331099650.6528,
+  "origin": "从原图重新生成独立尾巴、身体、闭眼与 A 嘴型",
+  "kind": "sample",
+  "regions": [
+    {
+      "id": "ahoge",
+      "name": "呆毛",
+      "parent": "head",
+      "points": [
+        [
+          295,
+          5
+        ],
+        [
+          535,
+          5
+        ],
+        [
+          535,
+          151
+        ],
+        [
+          298,
+          163
+        ]
+      ],
+      "sway": 0.7,
+      "visible": true
+    },
+    {
+      "id": "hair-front-left",
+      "name": "左前发束",
+      "parent": "head",
+      "points": [
+        [
+          434,
+          178
+        ],
+        [
+          506,
+          175
+        ],
+        [
+          505,
+          274
+        ],
+        [
+          467,
+          340
+        ],
+        [
+          456,
+          396
+        ],
+        [
+          460,
+          495
+        ],
+        [
+          491,
+          591
+        ],
+        [
+          450,
+          689
+        ],
+        [
+          387,
+          711
+        ],
+        [
+          381,
+          644
+        ],
+        [
+          427,
+          548
+        ],
+        [
+          423,
+          437
+        ],
+        [
+          399,
+          350
+        ],
+        [
+          414,
+          244
+        ]
+      ],
+      "sway": 0.8,
+      "visible": true
+    },
+    {
+      "id": "hair-front-right",
+      "name": "右前发束",
+      "parent": "head",
+      "points": [
+        [
+          669,
+          216
+        ],
+        [
+          738,
+          237
+        ],
+        [
+          768,
+          350
+        ],
+        [
+          745,
+          442
+        ],
+        [
+          765,
+          526
+        ],
+        [
+          789,
+          615
+        ],
+        [
+          801,
+          694
+        ],
+        [
+          740,
+          699
+        ],
+        [
+          704,
+          630
+        ],
+        [
+          691,
+          544
+        ],
+        [
+          696,
+          457
+        ],
+        [
+          689,
+          378
+        ]
+      ],
+      "sway": 0.8,
+      "visible": true
+    },
+    {
+      "id": "hair-back-left",
+      "name": "左后长发",
+      "parent": "head",
+      "points": [
+        [
+          335,
+          472
+        ],
+        [
+          425,
+          491
+        ],
+        [
+          392,
+          658
+        ],
+        [
+          334,
+          799
+        ],
+        [
+          329,
+          987
+        ],
+        [
+          283,
+          1114
+        ],
+        [
+          160,
+          1110
+        ],
+        [
+          12,
+          996
+        ],
+        [
+          9,
+          814
+        ],
+        [
+          69,
+          639
+        ],
+        [
+          238,
+          532
+        ]
+      ],
+      "sway": 1,
+      "visible": true
+    },
+    {
+      "id": "hair-back-right",
+      "name": "右后长发",
+      "parent": "head",
+      "points": [
+        [
+          747,
+          473
+        ],
+        [
+          837,
+          497
+        ],
+        [
+          949,
+          699
+        ],
+        [
+          1037,
+          843
+        ],
+        [
+          1038,
+          1049
+        ],
+        [
+          908,
+          1129
+        ],
+        [
+          839,
+          1073
+        ],
+        [
+          849,
+          946
+        ],
+        [
+          805,
+          852
+        ],
+        [
+          796,
+          710
+        ]
+      ],
+      "sway": 1,
+      "visible": true
+    }
+  ],
+  "settings": {
+    "sway": 0.8,
+    "talkGain": 1,
+    "mouthGain": 1.5,
+    "idle": true,
+    "blink": true,
+    "background": "checker",
+    "loop": true
+  },
+  "keyframes": [],
+  "layerVisibility": {
+    "detail_hair-front-left": true
+  },
+  "artReport": [
+    {
+      "asset": "eyes_closed",
+      "source": "imagegen",
+      "alignmentShift": [
+        0.19865986704826355,
+        0.10072240233421326
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "eyes_half",
+      "source": "imagegen",
+      "alignmentShift": [
+        0.19969913363456726,
+        0.04534011334180832
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "mouth_a",
+      "source": "imagegen",
+      "alignmentShift": [
+        0.12449676543474197,
+        0.19832594692707062
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "mouth_a_half",
+      "source": "imagegen",
+      "alignmentShift": [
+        0.21928130090236664,
+        0.0967765599489212
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "mouth_i",
+      "source": "imagegen",
+      "alignmentShift": [
+        0.16776365041732788,
+        0.11677657812833786
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "mouth_o",
+      "source": "imagegen",
+      "alignmentShift": [
+        0.1343291699886322,
+        0.0789225623011589
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "tail",
+      "source": "imagegen",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "asset": "body",
+      "source": "imagegen",
+      "outsideTailRegionChangedPixels": 0
+    }
+  ],
+  "artUpdated": 1793331099651.224
+}

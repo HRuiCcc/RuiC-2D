@@ -1,0 +1,11 @@
+[
+  {
+    "asset": "eyes_closed",
+    "source": "imagegen",
+    "alignmentShift": [
+      0.0,
+      0.0
+    ],
+    "outsideMaskChangedPixels": 0
+  }
+]

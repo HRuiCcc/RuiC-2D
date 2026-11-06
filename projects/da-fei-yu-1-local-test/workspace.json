@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "name": "大肥鱼1号 · 本地补绘实测",
+  "ready": true,
+  "updated": 1793333367180.0078,
+  "origin": "大肥鱼1号原始立绘、眼睛/嘴型差分、独立尾巴与真实口播",
+  "kind": "sample",
+  "regions": [
+    {
+      "id": "ahoge",
+      "name": "呆毛",
+      "parent": "head",
+      "points": [
+        [
+          295,
+          5
+        ],
+        [
+          535,
+          5
+        ],
+        [
+          535,
+          151
+        ],
+        [
+          298,
+          163
+        ]
+      ],
+      "sway": 0.7,
+      "visible": true
+    },
+    {
+      "id": "hair-front-left",
+      "name": "左前发束",
+      "parent": "head",
+      "points": [
+        [
+          434,
+          178
+        ],
+        [
+          506,
+          175
+        ],
+        [
+          505,
+          274
+        ],
+        [
+          467,
+          340
+        ],
+        [
+          456,
+          396
+        ],
+        [
+          460,
+          495
+        ],
+        [
+          491,
+          591
+        ],
+        [
+          450,
+          689
+        ],
+        [
+          387,
+          711
+        ],
+        [
+          381,
+          644
+        ],
+        [
+          427,
+          548
+        ],
+        [
+          423,
+          437
+        ],
+        [
+          399,
+          350
+        ],
+        [
+          414,
+          244
+        ]
+      ],
+      "sway": 0.8,
+      "visible": true
+    },
+    {
+      "id": "hair-front-right",
+      "name": "右前发束",
+      "parent": "head",
+      "points": [
+        [
+          669,
+          216
+        ],
+        [
+          738,
+          237
+        ],
+        [
+          768,
+          350
+        ],
+        [
+          745,
+          442
+        ],
+        [
+          765,
+          526
+        ],
+        [
+          789,
+          615
+        ],
+        [
+          801,
+          694
+        ],
+        [
+          740,
+          699
+        ],
+        [
+          704,
+          630
+        ],
+        [
+          691,
+          544
+        ],
+        [
+          696,
+          457
+        ],
+        [
+          689,
+          378
+        ]
+      ],
+      "sway": 0.8,
+      "visible": true
+    },
+    {
+      "id": "hair-back-left",
+      "name": "左后长发",
+      "parent": "head",
+      "points": [
+        [
+          335,
+          472
+        ],
+        [
+          425,
+          491
+        ],
+        [
+          392,
+          658
+        ],
+        [
+          334,
+          799
+        ],
+        [
+          329,
+          987
+        ],
+        [
+          283,
+          1114
+        ],
+        [
+          160,
+          1110
+        ],
+        [
+          12,
+          996
+        ],
+        [
+          9,
+          814
+        ],
+        [
+          69,
+          639
+        ],
+        [
+          238,
+          532
+        ]
+      ],
+      "sway": 1,
+      "visible": true
+    },
+    {
+      "id": "hair-back-right",
+      "name": "右后长发",
+      "parent": "head",
+      "points": [
+        [
+          747,
+          473
+        ],
+        [
+          837,
+          497
+        ],
+        [
+          949,
+          699
+        ],
+        [
+          1037,
+          843
+        ],
+        [
+          1038,
+          1049
+        ],
+        [
+          908,
+          1129
+        ],
+        [
+          839,
+          1073
+        ],
+        [
+          849,
+          946
+        ],
+        [
+          805,
+          852
+        ],
+        [
+          796,
+          710
+        ]
+      ],
+      "sway": 1,
+      "visible": true
+    }
+  ],
+  "settings": {
+    "sway": 0.4,
+    "talkGain": 1,
+    "mouthGain": 1.5,
+    "idle": true,
+    "blink": true,
+    "background": "checker",
+    "loop": true
+  },
+  "keyframes": [],
+  "layerVisibility": {
+    "detail_hair-front-left": true
+  },
+  "artReport": [
+    {
+      "asset": "eyes_closed",
+      "source": "local-drawing",
+      "alignmentShift": [
+        0.0,
+        0.0
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "eyes_half",
+      "source": "local-drawing",
+      "alignmentShift": [
+        0.0,
+        0.0
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "mouth_a",
+      "source": "local-drawing",
+      "alignmentShift": [
+        9.081490004447801e-10,
+        -3.105888657373157e-09
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "mouth_a_half",
+      "source": "local-drawing",
+      "alignmentShift": [
+        9.081490004447801e-10,
+        -3.105888657373157e-09
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "mouth_i",
+      "source": "local-drawing",
+      "alignmentShift": [
+        9.081490004447801e-10,
+        -3.105888657373157e-09
+      ],
+      "outsideMaskChangedPixels": 0
+    },
+    {
+      "asset": "mouth_o",
+      "source": "local-drawing",
+      "alignmentShift": [
+        9.081490004447801e-10,
+        -3.105888657373157e-09
+      ],
+      "outsideMaskChangedPixels": 0
+    }
+  ],
+  "artUpdated": 1793330735440.095,
+  "localDrawingNote": "眼睛与嘴型由本地绘制；尾巴在原轮廓内网格摆动或沿用已有独立素材，未凭空补全遮挡。"
+}

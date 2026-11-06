@@ -1,0 +1,27 @@
+[
+  {
+    "reply": "计划将尾巴周期设为7秒，头发摆幅设为0.3，其他保持不变。",
+    "operations": [
+      {
+        "kind": "rig",
+        "path": "appendages.2.period",
+        "value": 7
+      },
+      {
+        "kind": "setting",
+        "path": "sway",
+        "value": 0.3
+      }
+    ]
+  },
+  {
+    "reply": "计划将尾巴摆动周期改为7.1秒，其他保持不变。",
+    "operations": [
+      {
+        "kind": "rig",
+        "path": "appendages.2.period",
+        "value": 7.1
+      }
+    ]
+  }
+]

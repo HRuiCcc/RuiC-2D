@@ -1,0 +1,1 @@
+{"reply":"将尾巴摆幅设为4度、周期设为6秒，头发整体摆幅设为0.4；仅调整这三项。","operations":[{"kind":"rig","path":"appendages.2.amplitude","value":0.06981317007977318},{"kind":"rig","path":"appendages.2.period","value":6},{"kind":"setting","path":"sway","value":0.4}]}

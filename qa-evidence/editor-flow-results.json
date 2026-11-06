@@ -1,0 +1,59 @@
+[
+  {
+    "name": "两界面切换和共享工程",
+    "status": "pass"
+  },
+  {
+    "name": "五类部位动作快速测试",
+    "status": "pass"
+  },
+  {
+    "name": "图层显隐同时更新主画布与预览",
+    "status": "pass"
+  },
+  {
+    "name": "网格间距缩放定位和参考图导出",
+    "status": "pass"
+  },
+  {
+    "name": "眼睛控制点拖动与重建",
+    "status": "pass"
+  },
+  {
+    "name": "部件参数滑杆撤销",
+    "status": "pass"
+  },
+  {
+    "name": "独立部件运动与保存",
+    "status": "pass"
+  },
+  {
+    "name": "独立图层原位查看",
+    "status": "pass"
+  },
+  {
+    "name": "可编辑包兼容包PNG及重新导入",
+    "status": "pass"
+  },
+  {
+    "name": "配音导入播放与口型按钮",
+    "status": "pass"
+  },
+  {
+    "name": "动画配音录制",
+    "status": "pass"
+  },
+  {
+    "name": "麦克风摄像头校准和OBS播放器",
+    "status": "pass"
+  },
+  {
+    "name": "损坏文件可恢复报错",
+    "status": "pass"
+  },
+  {
+    "name": "浏览器未处理异常",
+    "status": "pass",
+    "errors": []
+  }
+]

@@ -1,0 +1,1 @@
+{"reply":"计划将尾巴周期从6秒改为5.5秒，其他保持不变。","operations":[{"kind":"rig","path":"appendages.2.period","value":5.5}]}

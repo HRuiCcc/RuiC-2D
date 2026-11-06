@@ -1,0 +1,56 @@
+[
+  {
+    "asset": "eyes_closed",
+    "source": "local-drawing",
+    "alignmentShift": [
+      0.0,
+      0.0
+    ],
+    "outsideMaskChangedPixels": 0
+  },
+  {
+    "asset": "eyes_half",
+    "source": "local-drawing",
+    "alignmentShift": [
+      0.0,
+      0.0
+    ],
+    "outsideMaskChangedPixels": 0
+  },
+  {
+    "asset": "mouth_a",
+    "source": "local-drawing",
+    "alignmentShift": [
+      9.081490004447801e-10,
+      -3.105888657373157e-09
+    ],
+    "outsideMaskChangedPixels": 0
+  },
+  {
+    "asset": "mouth_a_half",
+    "source": "local-drawing",
+    "alignmentShift": [
+      9.081490004447801e-10,
+      -3.105888657373157e-09
+    ],
+    "outsideMaskChangedPixels": 0
+  },
+  {
+    "asset": "mouth_i",
+    "source": "local-drawing",
+    "alignmentShift": [
+      9.081490004447801e-10,
+      -3.105888657373157e-09
+    ],
+    "outsideMaskChangedPixels": 0
+  },
+  {
+    "asset": "mouth_o",
+    "source": "local-drawing",
+    "alignmentShift": [
+      9.081490004447801e-10,
+      -3.105888657373157e-09
+    ],
+    "outsideMaskChangedPixels": 0
+  }
+]

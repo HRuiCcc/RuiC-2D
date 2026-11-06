@@ -1,0 +1,5 @@
+你在制作同一张原图的可动形象。原图：<仓库根目录>/projects/da-fei-yu-1-local-test/source.png，绑定：<仓库根目录>/projects/da-fei-yu-1-local-test/rig.json。用户授权将这张图片提交给已登录的内置生图工具，用于生成角色差分。
+先确认当前会话存在图像生成工具。若没有，不要假装生成，不要调用外部 API，不要读取 API Key；输出 IMAGE_GENERATION_UNAVAILABLE 后结束。
+逐项以原图为参考，生成 eyes_closed, eyes_half, mouth_a, mouth_a_half, mouth_i, mouth_o，保存到 <仓库根目录>/projects/da-fei-yu-1-local-test/generated/ai-output，每项一个同名 PNG。保留原图尺寸、人物位置、头部姿势、画风与透明背景。眼睛差分只改双眼（闭眼、半闭眼）；嘴型只改 mouth.area（A、半张 A、I、O）。闭眼不留虹膜或眼白；嘴型要移除原闭嘴线。不要重画非目标区域。保护蒙版在 <仓库根目录>/projects/da-fei-yu-1-local-test/generated/requests。工具输出在默认目录时复制到指定目录。不要覆盖 source.png 或 rig.json，不要运行其他生成器，也不要修改项目外文件。
+若绑定中存在带 layer 的 tail 附属，同时生成 tail.png 与 body.png：尾巴必须保持原图坐标、只留下独立尾巴，并补全遮挡部分；body.png 只去掉尾巴、保留全部头发和主体。
+每个文件成功后继续下一项，最后简述已经生成的文件与未完成项。

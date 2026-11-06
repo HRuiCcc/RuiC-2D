@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-30",
+  "provider": "Codex built-in imagegen",
+  "project": "da-fei-yu-1-generation-test",
+  "assets": [
+    "独立尾巴",
+    "无尾巴身体",
+    "闭眼",
+    "半闭眼",
+    "A 嘴型",
+    "半张 A 嘴型",
+    "I 嘴型",
+    "O 嘴型"
+  ],
+  "report": "projects/da-fei-yu-1-generation-test/generated/import-report.json",
+  "cliExecuted": true,
+  "cliValidatedTargets": [
+    "eyes_closed"
+  ],
+  "cliReport": "qa-evidence/cli-imagegen-import.json"
+}

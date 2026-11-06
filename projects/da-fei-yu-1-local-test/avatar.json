@@ -1,0 +1,15 @@
+{
+  "format": "mesh-avatar",
+  "version": 1,
+  "name": "大肥鱼1号 · 本地补绘实测",
+  "source": "source.png",
+  "lipSync": {
+    "granularity": 0.65,
+    "openness": 0.65,
+    "closeSpeed": 0.65,
+    "preset": "custom"
+  },
+  "studio": {
+    "version": "0.1.0"
+  }
+}
