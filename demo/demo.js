@@ -1,5 +1,5 @@
 const PROJECT = 'da-fei-yu-1';
-const VOICE = '/projects/' + PROJECT + '/voice.wav';
+const VOICE = '../projects/' + PROJECT + '/voice.wav';
 const channel = new BroadcastChannel('youxing-live');
 const frame = document.getElementById('avatar-frame');
 const loading = document.getElementById('loading');

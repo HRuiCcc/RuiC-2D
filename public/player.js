@@ -1,4 +1,4 @@
-const q=new URLSearchParams(location.search),portable=q.has('portable'),id=q.get('project')||'da-fei-yu-1',base=portable?'../':'/projects/'+encodeURIComponent(id)+'/',canvas=document.querySelector('canvas'),status=document.querySelector('#status');
+const q=new URLSearchParams(location.search),portable=q.has('portable'),id=q.get('project')||'da-fei-yu-1',base=portable?'../':'../projects/'+encodeURIComponent(id)+'/',canvas=document.querySelector('canvas'),status=document.querySelector('#status');
 const color={green:'#00b140',dark:'#151b27',white:'#f1f2f5',transparent:'transparent',checker:'transparent'};document.body.style.background=color[q.get('bg')]||'transparent';
 let workspace=null;try{workspace=await(await fetch(base+'workspace.json')).json();}catch{}
 let avatar,last=performance.now(),lastSignal=0,remote=null,time=0;
