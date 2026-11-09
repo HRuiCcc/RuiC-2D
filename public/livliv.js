@@ -1,6 +1,6 @@
 // LivLiv 角色库：把 player 运行时接进 RuiC-2D，21 个精选角色与本地工程并排浏览、直接开演。
 // 角色素材由 LivLiv（livliv.ai）提供，非商业使用、须署名；播放器按包内 meta.watermark 绘制水印。
-import { Player } from '/vendor/livliv/index.js'
+import { Player } from './vendor/livliv/index.js'
 
 const $ = (id) => document.getElementById(id)
 const stage = $('lv-stage'), canvas = $('lv-canvas'), poster = $('lv-poster'), frameEl = $('lv-frame')
@@ -41,7 +41,7 @@ function renderList(keyword = '') {
 
   if (livliv.length) {
     group('LivLiv 精选 · ' + livliv.length)
-    for (const e of livliv) listEl.append(charRow(e, '/characters/avatar/' + e.id + '.webp', e.id))
+    for (const e of livliv) listEl.append(charRow(e, '../characters/avatar/' + e.id + '.webp', e.id))
   }
   if (local.length) {
     group('本机工程 · ' + local.length)
@@ -94,12 +94,12 @@ async function openLivLiv(entry) {
   stopDevices()
   nameEl.textContent = entry.name
   subEl.textContent = 'LivLiv 精选角色'
-  poster.src = '/characters/cover/' + entry.id + '.webp'
+  poster.src = '../characters/cover/' + entry.id + '.webp'
   poster.classList.add('show')
   showStatus('正在载入 ' + entry.name + '…')
   if (!player) player = new Player(canvas, { followPointer: 'page', maxPixelRatio: Math.min(2, window.devicePixelRatio || 1) })
   try {
-    const info = await player.load('/characters/' + entry.id + '.livliv', { poster: '/characters/cover/' + entry.id + '.webp' })
+    const info = await player.load('../characters/' + entry.id + '.livliv', { poster: '../characters/cover/' + entry.id + '.webp' })
     hideStatus()
     poster.classList.remove('show')
     subEl.textContent = (info.meta?.license?.id || 'LivLiv') + ' · 格式 v' + info.version + (entry.credit ? ' · ' + entry.credit : '')
@@ -178,7 +178,7 @@ $('lv-mic').onclick = async () => {
   if (mic) { stopDevices(); return }
   try {
     showStatus('正在打开麦克风…')
-    const { startLipSync } = await import('/vendor/livliv/voice.js')
+    const { startLipSync } = await import('./vendor/livliv/voice.js')
     mic = await startLipSync(player)
     hideStatus(); btn.setAttribute('aria-pressed', 'true')
   } catch (e) { showStatus('麦克风没打开：' + (e?.message || e), true) }
@@ -190,9 +190,9 @@ $('lv-cam').onclick = async () => {
   if (cam) { stopDevices(); return }
   try {
     showStatus('正在准备摄像头追踪（首次要下载约 8 MB 面部模型）…')
-    const { startFaceTracking } = await import('/vendor/livliv/tracking.js')
+    const { startFaceTracking } = await import('./vendor/livliv/tracking.js')
     cam = await startFaceTracking(player, {
-      modelUrl: '/mediapipe/face_landmarker.task',
+      modelUrl: 'mediapipe/face_landmarker.task',
       onProgress: (s) => {
         if (s.step === 'download') showStatus('正在下载追踪模型 ' + Math.round((s.progress || 0) * 100) + '%…')
         else if (s.step === 'prepare') showStatus('正在初始化追踪…')
@@ -251,7 +251,7 @@ async function boot() {
   }
   try {
     const [idx, proj] = await Promise.all([
-      fetch('/characters/index.json').then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json() }),
+      fetch('../characters/index.json').then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json() }),
       fetch('/api/projects').then((r) => (r.ok ? r.json() : [])).catch(() => []),
     ])
     characters = (Array.isArray(idx) ? idx : []).map((c) => ({ ...c, kind: 'livliv' }))

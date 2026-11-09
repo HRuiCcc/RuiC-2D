@@ -26,7 +26,7 @@ async function boot() {
   if (!grid) return
   try {
     const [idx, proj] = await Promise.all([
-      fetch('/characters/index.json').then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json() }),
+      fetch('../characters/index.json').then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json() }),
       fetch('/api/projects').then((r) => (r.ok ? r.json() : [])).catch(() => []),
     ])
     const characters = Array.isArray(idx) ? idx : []
@@ -35,17 +35,17 @@ async function boot() {
     for (const c of characters) {
       grid.append(card({
         name: c.name,
-        src: '/characters/cover/' + c.id + '.webp',
+        src: '../characters/cover/' + c.id + '.webp',
         hint: 'LivLiv 精选角色',
-        href: '/livliv.html?id=' + encodeURIComponent(c.id),
+        href: 'livliv.html?id=' + encodeURIComponent(c.id),
       }))
     }
     for (const p of locals) {
       grid.append(card({
         name: p.name,
-        src: '/cases/' + encodeURIComponent(p.id) + '.webp',
+        src: 'cases/' + encodeURIComponent(p.id) + '.webp',
         hint: 'RuiC-2D 本机工程',
-        href: '/livliv.html?local=' + encodeURIComponent(p.id),
+        href: 'livliv.html?local=' + encodeURIComponent(p.id),
         tag: '本机工程',
       }))
     }
