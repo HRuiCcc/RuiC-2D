@@ -1,4 +1,4 @@
-@font-face{font-family:Harmony;src:url('/vendor/HarmonyOS.ttf') format('truetype');font-display:swap}
+@font-face{font-family:Harmony;src:url('vendor/HarmonyOS.ttf') format('truetype');font-display:swap}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden;background:#181b23;color:#edf0f8;font:13px Harmony,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
 body{--bg:#181b23;--panel:#20242e;--panel2:#252a37;--line:#353c4b;--text:#edf0f8;--muted:#a6b0c3;--blue:#91b4ff;--active:#2c416c}
