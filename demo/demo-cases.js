@@ -9,7 +9,7 @@ function card(entry) {
   a.href = '../public/livliv.html?id=' + encodeURIComponent(entry.id)
   a.title = entry.name + ' · 点开即演'
   const img = document.createElement('img')
-  img.src = '../characters/cover/' + encodeURIComponent(entry.id) + '.webp'
+  img.src = '../characters/cover-small/' + encodeURIComponent(entry.id) + '.webp'
   img.alt = entry.name
 
   img.onerror = () => { img.style.visibility = 'hidden' }

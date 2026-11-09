@@ -38,7 +38,7 @@ async function boot() {
     for (const c of characters) {
       grid.append(card({
         name: c.name,
-        src: '../characters/cover/' + c.id + '.webp',
+        src: '../characters/cover-small/' + c.id + '.webp',
         hint: 'LivLiv 精选角色',
         href: 'livliv.html?id=' + encodeURIComponent(c.id),
       }))
