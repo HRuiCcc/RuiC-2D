@@ -1,6 +1,5 @@
-@font-face{font-family:Harmony;src:url('vendor/HarmonyOS.ttf') format('truetype');font-display:swap}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;overflow:hidden;background:#181b23;color:#edf0f8;font:13px Harmony,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+html,body{margin:0;height:100%;overflow:hidden;background:#181b23;color:#edf0f8;font:13px -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
 body{--bg:#181b23;--panel:#20242e;--panel2:#252a37;--line:#353c4b;--text:#edf0f8;--muted:#a6b0c3;--blue:#91b4ff;--active:#2c416c}
 button,a{ -webkit-tap-highlight-color:transparent}
 button{font:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid transparent;background:transparent;border-radius:6px;padding:7px 10px;transition:background .14s,border-color .14s}
