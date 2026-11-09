@@ -48,6 +48,8 @@ const server=http.createServer(async(req,res)=>{try{
   let base=path.join(ROOT,'public'),rel=p==='/'?'index.html':p.slice(1);
   if(p.startsWith('/projects/')){base=PROJECTS;rel=p.slice(10);}
   if(p.startsWith('/characters/')){base=path.join(ROOT,'characters');rel=p.slice(12);}
+  if(p.startsWith('/public/')){base=path.join(ROOT,'public');rel=p.slice(8);}
+  if(p==='/demo'||p.startsWith('/demo/')){base=path.join(ROOT,'demo');rel=(p==='/demo'||p==='/demo/')?'index.html':p.slice(6);}
   if(p.startsWith('/exports/')){base=path.join(ROOT,'exports');rel=p.slice(9);}
   const full=path.resolve(base,rel);if(!full.startsWith(base+path.sep))return send(res,403,{error:'路径不可访问'});return serve(res,full);
  }
