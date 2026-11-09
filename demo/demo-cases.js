@@ -11,7 +11,7 @@ function card(entry) {
   const img = document.createElement('img')
   img.src = '../characters/cover/' + encodeURIComponent(entry.id) + '.webp'
   img.alt = entry.name
-  img.loading = 'lazy'
+
   img.onerror = () => { img.style.visibility = 'hidden' }
   const name = document.createElement('span')
   name.className = 'case-name'
