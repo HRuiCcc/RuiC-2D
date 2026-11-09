@@ -43,3 +43,18 @@
 /* 案例墙细节：顶部收紧，长名字两行不截断 */
 .home{padding-top:26px}
 .case-name{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.35;min-height:2.7em;align-content:center;overflow-wrap:anywhere}
+
+/* 上传卡：作为案例墙里的一格，与角色卡同区 */
+.upload-card{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:16px 12px;border:1px dashed #5f779e;border-radius:9px;background:#1e2a3d;text-align:center;transition:background .15s,border-color .15s}
+.upload-card:hover{background:#243149;border-color:#8fb0e4}
+.upload-card.dragging{background:#304b75;border-color:#a8caff}
+.upload-card .upload-mark{color:#a2c3ff;background:#2d4162;border-radius:10px;padding:9px;margin-bottom:1px}
+.upload-card .upload-mark svg{width:22px;height:22px}
+.upload-card b{font-size:12px;font-weight:600;line-height:1.4}
+.upload-card>span{font-size:10px;color:#a9bdd9;line-height:1.5}
+.upload-card button{font-size:10px;padding:6px 10px;gap:5px;border-radius:5px}
+.upload-card button svg{width:12px;height:12px}
+.upload-card small{font-size:9px;color:#8ba1c2;line-height:1.5}
+.upload-card .background-option{font-size:9px;color:#c0d2ea;display:flex;align-items:center;gap:4px;justify-content:center}
+.upload-card .background-option input{width:11px;height:11px;margin:0}
+.home-bottom{margin-top:26px;padding-top:0;border-top:0;gap:14px}

@@ -30,7 +30,10 @@ async function boot() {
       fetch('/api/projects').then((r) => (r.ok ? r.json() : [])).catch(() => []),
     ])
     const characters = Array.isArray(idx) ? idx : []
-    const locals = Array.isArray(proj) ? proj : []
+    const all = Array.isArray(proj) ? proj : []
+    // 大肥鱼只留主工程一个，其余实测工程在角色库侧栏里仍可切换
+    const main = all.find((p) => p.id === 'da-fei-yu-1')
+    const locals = main ? [main] : all.slice(0, 1)
 
     for (const c of characters) {
       grid.append(card({

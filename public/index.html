@@ -24,13 +24,20 @@
  <section class="timeline-panel" aria-label="声音与动作时间轴"><div class="transport"><div class="timeline-tabs"><button id="timeline-mode" class="active" data-icon="layers">动作与配音</button><button id="load-demo-audio" class="quiet" data-icon="mic">案例配音</button></div><div class="playback"><button id="start-time" class="icon-btn" data-icon="back" aria-label="回到开头"></button><button id="play" class="icon-btn play-button" data-icon="play" aria-label="播放或暂停"></button><span id="timecode">00:00.00</span><span id="duration-label">/ 00:10.00</span><label class="loop-toggle"><input id="loop" type="checkbox" checked>循环</label></div><div class="transport-actions"><button id="import-audio" class="secondary" data-icon="mic">导入配音</button><button id="record" class="secondary" data-icon="record">录制动画</button></div></div><div class="timeline-body"><div class="track-names"><span>时间</span><span data-icon="mic">配音</span><span data-icon="eye">眨眼</span><span data-icon="move">身体</span><span data-icon="tail">尾巴</span></div><div id="timeline-wrap"><canvas id="timeline" aria-label="配音波形和动作关键帧；单击定位，双击添加关键帧" tabindex="0"></canvas></div></div><div class="timeline-footer"><span>单击定位 · 双击添加眨眼、倾斜或摆尾 · 空格播放</span><button id="clear-keyframes" class="text-btn">清空动作关键帧</button><span>默认本地处理 · AI 绘制按所选方式</span></div></section>
 </main>
 <section id="home" class="home">
- <div class="home-main"><div class="home-copy"><span class="home-symbol"><img src="/brand/mark.svg" alt="RuiC-2D 标识"></span><h1>一张图片，<br>让你的形象动起来。</h1><p>上传照片或立绘，生成分层与绑定。<br>眨眼、摆动、跟着配音说话，都在这里完成。</p><div class="home-steps"><span>导入图片</span><span>自动制作</span><span>预览与导出</span></div></div>
- <div class="upload-area" id="drop-zone"><div class="upload-mark" data-icon="upload"></div><h2>把你的形象放进来</h2><p>拖入图片，或点击选择</p><button id="choose-image" class="primary large" data-icon="image">选择一张图片</button><small>PNG / JPG / WebP · 推荐正面、双眼清晰的单人图片</small><label class="background-option"><input id="remove-background" type="checkbox" checked>为不透明照片尝试去除背景</label><div class="privacy-line" data-icon="lock">在本机识别和处理，无需上传到云端</div></div></div>
   <section class="home-cases" id="home-cases">
-   <div class="cases-head"><div><h2>角色案例库</h2><p><span id="case-count">载入中…</span> · 点开即演，表情 / 动作 / 口型 / 摄像头追踪都能试</p></div><a class="cases-all" href="/livliv.html">进入角色库<span data-icon="chevron"></span></a></div>
-   <div class="cases-grid" id="cases-grid"></div>
+   <div class="cases-head"><div><h2>角色案例库</h2><p><span id="case-count">载入中…</span> · 点开即演，表情 / 动作 / 口型 / 摄像头追踪都能试</p></div><a class="cases-all" href="livliv.html">进入角色库<span data-icon="chevron"></span></a></div>
+   <div class="cases-grid" id="cases-grid">
+    <div class="upload-card" id="drop-zone">
+     <div class="upload-mark" data-icon="upload"></div>
+     <b>把你的形象放进来</b>
+     <span>拖入图片，或点击选择</span>
+     <button id="choose-image" class="primary" data-icon="image">选择一张图片</button>
+     <small>PNG / JPG / WebP · 推荐正面、双眼清晰</small>
+     <label class="background-option"><input id="remove-background" type="checkbox" checked>为照片去除背景</label>
+    </div>
+   </div>
   </section>
- <div class="home-bottom"><button id="open-example" class="example-button"><img src="/projects/da-fei-yu-1/source.png" alt="大肥鱼1号蓝发角色案例"><div><b>先试试「大肥鱼1号」</b><span>真实立绘 → 精细分层 → 配音口型 → 可动形象</span></div><span data-icon="chevron"></span></button><button id="import-package-home" class="quiet" data-icon="folder">打开已有角色包</button></div>
+ <div class="home-bottom"><button id="import-package-home" class="quiet" data-icon="folder">打开已有角色包</button></div>
  <div class="home-note">正面人像自动定位；插画识别不到时，补点双眼和嘴巴即可继续。细分层可在生成后调整。</div>
 </section>
 <dialog id="import-dialog"><div class="dialog-head"><h2>从图片制作形象</h2><button data-close class="icon-btn" data-icon="close" aria-label="关闭"></button></div><div id="import-content"></div></dialog>
