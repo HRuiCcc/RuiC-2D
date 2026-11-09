@@ -26,12 +26,23 @@ let turnUntil = 0;
 let tailUntil = 0;
 let smileUntil = 0;
 
-function hideLoading() {
-  setTimeout(() => loading.classList.add('hidden'), 350);
+// 加载层和封面一直留到 iframe 里真的画出角色（角色资源较大，慢网络下要几十秒）
+const poster = document.getElementById('stage-poster');
+function frameReady() {
+  try {
+    const w = frame.contentWindow;
+    return !!(w && w.__player && w.__player.avatar);
+  } catch { return false }
 }
-if (frame.contentDocument?.readyState === 'complete') hideLoading();
-else frame.addEventListener('load', hideLoading, { once: true });
-setTimeout(() => loading.classList.add('hidden'), 2500);
+function revealStage() {
+  loading.classList.add('hidden');
+  if (poster) poster.classList.add('hidden');
+}
+const readyTimer = setInterval(() => {
+  if (frameReady()) { clearInterval(readyTimer); revealStage(); }
+}, 700);
+// 兜底：90 秒后无论如何揭开，免得一直转圈
+setTimeout(() => { clearInterval(readyTimer); revealStage(); }, 90000);
 
 async function loadEnvelope() {
   if (envelope) return;
