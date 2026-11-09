@@ -179,13 +179,20 @@ a:hover { color: #fff; }
   inset: 0;
   z-index: 2;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding-bottom: 22px;
   gap: 11px;
-  background: rgba(10, 15, 24, .9);
-  color: #c4d6f5;
+  background: linear-gradient(180deg, rgba(10, 15, 24, .12) 0%, rgba(10, 15, 24, .72) 78%);
+  color: #dbe7fb;
   font-size: 13px;
   transition: opacity .35s ease, visibility .35s ease;
+}
+.loading > span:last-child {
+  background: rgba(12, 19, 31, .82);
+  border: 1px solid rgba(145, 180, 255, .22);
+  border-radius: 999px;
+  padding: 7px 15px;
 }
 .loading.hidden { opacity: 0; pointer-events: none; visibility: hidden; }
 
