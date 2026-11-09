@@ -125,6 +125,23 @@ npm start
 
 角色包解压后运行 `python3 -m http.server 8080`，打开 `/player/player.html?portable=1` 独立播放。
 
+## LivLiv 角色库（21 位精选角色 + 本机工程）
+
+首页「角色案例库」把 21 位 LivLiv 精选角色和本机工程铺在一起，点开就能演：
+
+- 地址：<http://127.0.0.1:8796/livliv.html>（首页区块也能直接进）
+- **表情**：自然 / 笑 / 害羞 / 生气 / 难过……按角色实际拥有的表情生成
+- **动作**：点头、摇头、歪头、跳一下、害羞
+- **口型**：点「麦克风」按真实音量驱动，画面与声音都不出本机
+- **面部追踪**：点「摄像头」用 MediaPipe 在本地跟随转头与表情（首次需联网下载约 8 MB 运行时，模型走本机 `public/mediapipe/`）
+- **OBS**：点「OBS」复制地址，`&chrome=0&bg=transparent` 只留角色、不要界面
+- **截图**：导出带水印的当前姿态 PNG
+- **大肥鱼三个本机工程**也在同一个列表里，点开走 RuiC-2D 自己的播放器
+
+角色素材的许可见 [`characters/LICENSE.md`](characters/LICENSE.md)：**仅供非商业使用、须署名「角色：LivLiv（livliv.ai）」、禁止单独分发**。Kujira / Kujira Q 为 CC BY-NC-SA 4.0，Pen 的权利不在 LivLiv 手中（见 [`characters/CREDITS.md`](characters/CREDITS.md)）。播放器按模型包里的 `meta.watermark` 绘制水印，没有隐藏开关。
+
+播放器运行时（`public/vendor/livliv/`）来自 [@livliv-dev/player](https://github.com/livliv-dev/player)，Apache-2.0；角色本体不适用该许可。
+
 ## 示例工程：大肥鱼1号
 
 仓库内置三个可直接打开的示例，启动后在顶部工程切换器中切换：
@@ -161,6 +178,8 @@ art-service.mjs     AI 生图 / 本地补绘任务调度
 validation.mjs      动作参数校验
 tools/              Python 分层、绑定、补绘与导出流水线
 public/             编辑器、播放器、MediaPipe 运行库与品牌资源
+public/vendor/livliv/  LivLiv 播放器运行时（Apache-2.0）
+characters/         LivLiv 精选角色包（.livliv + 封面 + 许可）
 projects/           角色工程（含三个示例，可直接打开）
 qa-evidence/        自动化流程与功能验证记录
 docs/               README 截图

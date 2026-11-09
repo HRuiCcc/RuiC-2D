@@ -9,7 +9,7 @@ import {capabilities,createArtJob,getArtJob} from './art-service.mjs';
 
 const ROOT=path.dirname(fileURLToPath(import.meta.url)), PROJECTS=path.join(ROOT,'projects');
 const PORT=Number(process.env.YOUXING_PORT||8796), MAX=48*1024*1024;
-const MIME={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.wav':'audio/wav','.wasm':'application/wasm','.ttf':'font/ttf','.svg':'image/svg+xml'};
+const MIME={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.wav':'audio/wav','.mp3':'audio/mpeg','.wasm':'application/wasm','.ttf':'font/ttf','.svg':'image/svg+xml','.livliv':'application/vnd.livliv.model+zip'};
 const locks=new Set();
 function project(id){if(!/^[a-zA-Z0-9_-]{1,90}$/.test(id))throw Error('工程编号无效');return path.join(PROJECTS,id);}
 async function json(file){return JSON.parse(await fs.readFile(file,'utf8'));}
@@ -47,6 +47,7 @@ const server=http.createServer(async(req,res)=>{try{
  if(req.method==='GET'){
   let base=path.join(ROOT,'public'),rel=p==='/'?'index.html':p.slice(1);
   if(p.startsWith('/projects/')){base=PROJECTS;rel=p.slice(10);}
+  if(p.startsWith('/characters/')){base=path.join(ROOT,'characters');rel=p.slice(12);}
   if(p.startsWith('/exports/')){base=path.join(ROOT,'exports');rel=p.slice(9);}
   const full=path.resolve(base,rel);if(!full.startsWith(base+path.sep))return send(res,403,{error:'路径不可访问'});return serve(res,full);
  }
