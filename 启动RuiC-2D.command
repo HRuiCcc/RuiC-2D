@@ -3,8 +3,11 @@ cd "${0:A:h}"
 if ! command -v node >/dev/null; then
   print "未找到 Node.js，请先安装 Node.js 20 或更新版本。"; read "reply?按回车退出"; exit 1
 fi
-if ! python3 -c 'import PIL, numpy, cv2' >/dev/null 2>&1; then
-  print "缺少图像依赖。请先运行：python3 -m pip install -r requirements.txt"; read "reply?按回车退出"; exit 1
+if [ ! -x .venv/bin/python ] || ! .venv/bin/python -c 'import PIL, numpy, cv2' >/dev/null 2>&1; then
+  print "首次启动：正在项目内创建 .venv 并安装图像依赖（不会改动系统 Python）…"
+  if ! node scripts/setup.mjs; then
+    print "依赖安装没有完成。可手动运行 npm run setup 查看原因。"; read "reply?按回车退出"; exit 1
+  fi
 fi
 PORT=${YOUXING_PORT:-8796}
 if curl --max-time 2 -fs "http://127.0.0.1:$PORT/api/projects" >/dev/null 2>&1; then

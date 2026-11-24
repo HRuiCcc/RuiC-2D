@@ -58,3 +58,7 @@
 .upload-card .background-option{font-size:9px;color:#c0d2ea;display:flex;align-items:center;gap:4px;justify-content:center}
 .upload-card .background-option input{width:11px;height:11px;margin:0}
 .home-bottom{margin-top:26px;padding-top:0;border-top:0;gap:14px}
+
+/* 空格 + 鼠标左键拖动平移画布 */
+.stage.space-pan{cursor:grab}
+.stage.panning,.stage.panning *{cursor:grabbing!important}

@@ -61,3 +61,22 @@
 - 兼容mavatar合并新增精细层；完整自定义部件动作使用yxavatar保留。
 
 临时测试工程、日志和截图归档到工作区 `work/`，不混入正式案例。
+
+## 2026-11-24 修复与回归（Issue #1 / #2 / #3）
+
+### 修复内容
+
+| Issue | 原因 | 修复 |
+| --- | --- | --- |
+| #2 Windows 新建角色报错 | 图片处理子进程提前退出（Windows 上没有 `python3`、或依赖缺失）时，Node 往子进程 stdin 写入大段图片数据触发 `EPIPE` / `EOF`；这个 Socket `error` 没有监听，整个服务退出，页面只剩 `Failed to fetch` | 统一 `lib/python.mjs` 启动 Python：监听 stdin/stdout/stderr 错误、按顺序尝试 `.venv` → `python` → `py -3`、把 `No module named` / 找不到解释器翻译成中文提示；同时给 HTTP 请求/响应加错误监听和写入保护，客户端中途断开不再拖垮服务 |
+| #3 安装报 PEP 668 | README 让用户直接 `python3 -m pip install`，Debian/Ubuntu/Homebrew 的 Python 会拒绝写入系统环境 | 新增 `npm run setup`：在项目内创建 `.venv` 并安装依赖；服务与 macOS 启动脚本自动优先使用 `.venv`；README 不再建议系统 pip |
+| #1 导入分好层的 PSD | 之前只支持单张图片，没有分层导入入口 | 新增无额外依赖的 `tools/psd_import.py`（8 位 RGB/灰度，RAW/RLE 压缩，读取图层名、边界、透明度、显隐），新增 `POST /api/psd-inspect` 与 `POST /api/create-psd`，首页与顶栏加「导入分层 PSD」；每个可见图层切成可单独摆动的像素层 |
+
+### 回归验证
+
+- `npm test`：6 项通过。覆盖「子进程秒退 + 8 MB stdin 不产生未捕获异常」「`.venv` 优先」「Python 缺失时接口返回中文提示且服务存活」「客户端中途断开」「损坏 PSD 报错且服务存活」「自造 PSD（RAW + RLE + 隐藏图层）解析」。
+- 真实 HTTP 流程（本机 8899 端口）：`/api/psd-inspect` → 300×400、5 个图层；`/api/create-psd` → 工程 `ready:true`，生成 5 个 `detail_psd-layer-*` 图层；`/api/create` 图片路径同样通过。
+- 无头 Chromium 走完整界面：上传 PSD → 合成图定位三点 → 生成工程 → 图层树出现「底图 / 头发 / 左眼 / 右眼 / 嘴巴」。
+- 使用 `npm run setup` 新建的 `.venv`（Pillow 13 / NumPy 2.5 / OpenCV 5.1）重跑以上测试，全部通过。
+
+**验证边界**：Windows 实机未复测；原始的 `write EOF` 崩溃在 macOS 上用「立即退出的假 Python + 8 MB stdin」复现出同样的 `Unhandled 'error' event`，修复后服务存活。PSD 的图层组、图层样式、混合模式和未栅格化文字层不保留；PSB、16/32 位、CMYK、ZIP 压缩图层会给出明确中文提示。

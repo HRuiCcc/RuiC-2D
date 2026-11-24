@@ -44,8 +44,9 @@ A local-first 2D avatar editor that turns one illustration into a riggable chara
 ## 核心能力
 
 - **单图成角色**：导入一张正面立绘，本地完成人像分割与五官分层；识别失败时可手动补点。
+- **分层 PSD 导入**：拖入已经分好层的 PSD，每个可见图层都会变成可单独摆动的像素图层；图层顺序、显隐和透明度会保留。
 - **可动部位**：头部、身体、双眼、嘴巴、尾巴、发束，以及沿轮廓新增的手、袖子等自定义部件。
-- **网格绑定**：拖动眼白轮廓与切分范围，5–100px 坐标网格，滚轮缩放、Alt + 拖动平移。
+- **网格绑定**：拖动眼白轮廓与切分范围，5–100px 坐标网格，滚轮缩放、空格（或 Alt）+ 左键拖动平移。
 - **口型与时间轴**：导入配音，用真实音量驱动口型；双击时间轴添加眨眼、身体倾斜、摆尾。
 - **实时驱动**：本地 MediaPipe 面部追踪，麦克风与摄像头画面不上传；复制地址即可接入 OBS 浏览器源。
 - **导出**：可重新编辑的 `.yxavatar`、兼容 Mesh Avatar 的 `.mavatar`、透明 PNG、1080 方形 30fps 透明 WebM。
@@ -53,7 +54,7 @@ A local-first 2D avatar editor that turns one illustration into a riggable chara
 
 ## 三步做出会说话的角色
 
-1. **导入**：首页拖入 PNG / JPG / WebP，或直接打开「大肥鱼1号」示例。
+1. **导入**：首页拖入 PNG / JPG / WebP，或选择分好层的 PSD，也可以直接打开「大肥鱼1号」示例。
 2. **绑定**：等自动分层完成；识别不准就补点双眼和嘴巴，再按需改轮廓、加部件、调动作。
 3. **开口**：在「配音 / 口型」导入音频，或在「直播」开麦；预览满意后导出角色包或录 WebM。
 
@@ -64,13 +65,17 @@ A local-first 2D avatar editor that turns one illustration into a riggable chara
 ```bash
 git clone https://github.com/HRuiCcc/RuiC-2D.git
 cd RuiC-2D
-python3 -m pip install -r requirements.txt
+npm run setup   # 首次运行：在项目里创建 .venv 并安装 Python 依赖
 npm start
 ```
 
-打开 <http://127.0.0.1:8796>。macOS 也可以双击 `启动RuiC-2D.command`；其他桌面系统使用上面的命令行启动。
+打开 <http://127.0.0.1:8796>。macOS 也可以双击 `启动RuiC-2D.command`（缺少依赖时会自动补装）；其他桌面系统使用上面的命令行启动。
+
+> **不要直接 `python3 -m pip install -r requirements.txt`。** Debian / Ubuntu / 新版 Homebrew 的 Python 受 PEP 668 保护，会报 `externally-managed-environment`。`npm run setup` 只装进项目内的 `.venv`，不碰系统 Python，也不会要求 `--break-system-packages`。
 
 - 不需要 `npm install`，前端与运行库均已随仓库提供。
+- 手动安装也行：`python3 -m venv .venv`，然后 `.venv/bin/pip install -r requirements.txt`（Windows 用 `.venv\Scripts\pip`）。
+- Windows 需要 Python 3.10+，安装时勾选 **Add Python to PATH**；服务会依次尝试 `.venv\Scripts\python.exe`、`python`、`py -3`，找不到时会在页面里给出中文提示。
 - 导入配音需要系统安装 **FFmpeg**。
 - 推荐使用最新版 Chrome / Edge（Chromium 内核），需要 WebGL2 与 WebAssembly。
 - AI 生图是可选能力：检测到本机已登录 [Codex CLI](https://github.com/openai/codex) 且启用 `image_generation` 时走 AI 路线，否则自动降级为本地绘制。没有配置任何 API Key。
@@ -88,7 +93,7 @@ npm start
 
 ## 网格与精细参数
 
-支持原图、独立图层、动效视图；5/10/25/50/100px 坐标网格；滚轮缩放，Alt + 拖动平移，定位部件及网格 PNG 导出。
+支持原图、独立图层、动效视图；5/10/25/50/100px 坐标网格；滚轮缩放，空格（或 Alt）+ 左键拖动平移，定位部件及网格 PNG 导出。
 
 高级页保留头部、身体、双眼、嘴部、脸部细节、腮红、发丝、耳饰/尾巴、网格及视图参数。参数保存前校验，失败重建会恢复最后的有效工程和图层。
 
@@ -97,6 +102,10 @@ npm start
 ## 从新图制作
 
 首页导入 PNG/JPG/WebP。最大边长 4096，工作图限制到 2048。正面人像尝试本地面部定位与人像分割，生成头发、皮肤、服装和五官层。插画识别失败时补点左眼、右眼和嘴巴三处。
+
+**导入分层 PSD**：点首页「导入分层 PSD」，或把 `.psd` 直接拖进上传卡。可见图层会按从下到上的顺序导入为独立像素图层，铺满画布的底图并入底图，隐藏图层不导入。导入后同样需要定位双眼和嘴巴：能识别面部就自动完成，识别不到就点三下。
+
+PSD 支持 8 位 RGB / 灰度、RAW 与 RLE 压缩，最多 100 个图层（可切分 60 个）。图层组会展开、图层样式与混合模式不会保留，文字层请先在 Photoshop 里栅格化；PSB、16/32 位、CMYK 与 ZIP 压缩图层暂不支持。
 
 人像分割不是完整的前后遮挡理解；复杂插画、道具和发束需要继续修正。界面区分独立像素层与网格形变区。
 
@@ -176,7 +185,11 @@ npm start
 server.mjs          本地 HTTP 服务、工程与导出接口
 art-service.mjs     AI 生图 / 本地补绘任务调度
 validation.mjs      动作参数校验
+lib/                Python 解释器解析与子进程容错
+scripts/setup.mjs   npm run setup：创建 .venv 并安装依赖
+tests/              Node 回归测试（子进程崩溃、客户端断开、PSD 报错）
 tools/              Python 分层、绑定、补绘与导出流水线
+tools/psd_import.py PSD 分层读取（无额外依赖）
 public/             编辑器、播放器、MediaPipe 运行库与品牌资源
 public/vendor/livliv/  LivLiv 播放器运行时（Apache-2.0）
 characters/         LivLiv 精选角色包（.livliv + 封面 + 许可）
@@ -197,6 +210,15 @@ assets/             品牌与赞赏素材
 
 **没有 Codex / 不想用 AI 能跑吗？**
 能。AI 生图只是可选路线，没有时会自动降级为本地补绘，口型和表情仍然可用。
+
+**安装依赖时报 `externally-managed-environment` / PEP 668 怎么办？**
+这是系统 Python 的保护机制，不是项目坏了。运行 `npm run setup`，它会在项目内建 `.venv` 并安装依赖；之后 `npm start` 会自动优先使用这个 `.venv`。不要用 `--break-system-packages` 去改系统 Python。
+
+**Windows 上新建角色时报错、服务直接退出？**
+已修复：子进程提前退出时不会再拖垮 Node 服务，缺少 Python 或依赖时页面会显示中文原因。请先更新到最新代码，运行 `npm run setup`，确认 `python --version` 可用；仍然失败请把页面提示和终端最后几行发到 Issue。
+
+**支持导入分好层的 PSD 吗？**
+支持。见上文「导入分层 PSD」。每个图层都会成为可单独摆动的部件，但图层组、图层样式、混合模式、未栅格化的文字层不会保留。
 
 **支持哪些素材格式？**
 图片支持 PNG / JPG / WebP，最大边长 4096（工作图限制 2048）；音频支持 WAV / MP3 / M4A，导入时用 FFmpeg 统一转成 24kHz 单声道。

@@ -4,3 +4,6 @@ exports/
 .cache/
 *.log
 projects/*/voice.input
+
+.venv/
+__pycache__/

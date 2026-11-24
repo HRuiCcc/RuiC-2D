@@ -34,6 +34,57 @@ def sample_workspace():
       {'id':'hair-back-left','name':'左后长发','parent':'head','points':[[335,472],[425,491],[392,658],[334,799],[329,987],[283,1114],[160,1110],[12,996],[9,814],[69,639],[238,532]],'sway':1,'visible':True},
       {'id':'hair-back-right','name':'右后长发','parent':'head','points':[[747,473],[837,497],[949,699],[1037,843],[1038,1049],[908,1129],[839,1073],[849,946],[805,852],[796,710]],'sway':1,'visible':True}
     ],'settings':{'sway':.8,'talkGain':1,'mouthGain':1.5,'idle':True,'blink':True,'background':'checker','loop':True},'keyframes':[], 'layerVisibility':{}}
+def apply_landmarks(r,data):
+    # Real landmarks override generic elliptical contours whenever detected.
+    for eye,contour in zip(r['eyes'],data.get('eyeContours') or []):
+      if len(contour)>=8:
+        eye['opening']=contour;cx=np.mean([x for x,y in contour]);cy=np.mean([y for x,y in contour]);eye['roi']=[[float(cx+(x-cx)*1.48),float(cy+(y-cy)*1.7)] for x,y in contour]
+
+HEAD_WORDS=('头','发','脸','眼','眉','嘴','口','耳','呆毛','刘海','须','neck','head','hair','face','eye','mouth','ear')
+def _head_layer(name): return any(word in (name or '').lower() for word in HEAD_WORDS)
+def _region_id(name,index,used):
+    slug=re.sub(r'[^a-zA-Z0-9_-]+','-',name or '').strip('-').lower()[:40]
+    rid='psd-'+(slug or 'layer-'+str(index+1))
+    rid=re.sub(r'-+','-',rid)[:60];candidate=rid;n=2
+    while candidate in used:candidate=rid[:55]+'-'+str(n);n+=1
+    used.add(candidate);return candidate
+def _paste_alpha(image,canvas,left,top):
+    w,h=image.size;x0,y0=max(0,left),max(0,top);x1,y1=min(canvas.width,left+w),min(canvas.height,top+h)
+    if x1>x0 and y1>y0:canvas.paste(image.crop((x0-left,y0-top,x1-left,y1-top)),(x0,y0))
+def create_psd(i,psd_path,data):
+    import psd_import
+    doc=psd_import.read_psd(psd_path)
+    w,h,scale=psd_import.working_size(doc['width'],doc['height'])
+    base=psd_import.composite(doc,w,h,scale)
+    if base.getbbox() is None:raise ValueError('PSD 里没有可见的图层内容')
+    anchors=data.get('anchors')
+    if not isinstance(anchors,list) or len(anchors)!=3:raise ValueError('需要定位双眼和嘴巴（3 个点）后才能生成绑定')
+    anchors=[[max(0,min(w-1,float(x))),max(0,min(h-1,float(y)))] for x,y in anchors]
+    p=project(i);p.mkdir()
+    try:
+      base.save(p/'source.png')
+      r=make_rig(w,h,anchors);apply_landmarks(r,data);save(p/'rig.json',r)
+      save(p/'avatar.json',{'format':'mesh-avatar','version':1,'name':data.get('name') or 'PSD 导入','source':'source.png'})
+      (p/'masks').mkdir(exist_ok=True);regions=[];used=set();skipped=0
+      for index,layer in enumerate(doc['layers']):
+        if not layer['visible']:continue
+        if len(regions)>=60:raise ValueError('可导入的图层超过 60 个，请先在 Photoshop 里合并图层再导入')
+        alpha=layer['image'].getchannel('A');left,top,right,bottom=layer['bounds']
+        if scale!=1:
+          alpha=alpha.resize((max(1,round((right-left)*scale)),max(1,round((bottom-top)*scale))),Image.LANCZOS);left,top=round(left*scale),round(top*scale)
+        canvas=Image.new('L',(w,h),0);_paste_alpha(alpha,canvas,left,top);arr=np.asarray(canvas)
+        if arr.max()==0:continue
+        if float((arr>8).mean())>0.92:skipped+=1;continue
+        ys,xs=np.where(arr>8);x0,y0,x1,y1=int(xs.min()),int(ys.min()),int(xs.max())+1,int(ys.max())+1
+        if x1-x0<2 or y1-y0<2:continue
+        rid=_region_id(layer['name'],index,used);Image.fromarray(arr).save(p/'masks'/(rid+'.png'))
+        regions.append({'id':rid,'name':(layer['name'] or '图层 '+str(index+1))[:30],'parent':'head' if _head_layer(layer['name']) else 'body','points':[[x0,y0],[x1,y0],[x1,y1],[x0,y1]],'sway':.8,'visible':True,'mask':'masks/'+rid+'.png'})
+      origin='PSD 分层导入 · '+str(len(regions))+' 个独立图层'+(('（'+str(skipped)+' 个铺满画布的图层并入底图）') if skipped else '')
+      save(p/'workspace.json',{'version':1,'name':str(data.get('name') or 'PSD 导入')[:80],'ready':False,'updated':time.time()*1000,'kind':'psd','origin':origin,'regions':regions,'settings':sample_workspace()['settings'],'keyframes':[],'layerVisibility':{}})
+      build(i)
+    except Exception:
+      shutil.rmtree(p,ignore_errors=True);raise
+
 def create(i,data):
     p=project(i);p.mkdir()
     raw=base64.b64decode(data['image'].split(',',1)[1],validate=True)
@@ -63,10 +114,7 @@ def create(i,data):
     if not isinstance(anchors,list) or len(anchors)!=3:raise ValueError('需要检测到双眼和嘴巴，或点击三个定位点')
     anchors=[[max(0,min(w-1,float(x))),max(0,min(h-1,float(y)))] for x,y in anchors]
     r=make_rig(w,h,anchors)
-    # Real landmarks override generic elliptical contours whenever detected.
-    for eye,contour in zip(r['eyes'],data.get('eyeContours') or []):
-      if len(contour)>=8:
-        eye['opening']=contour;cx=np.mean([x for x,y in contour]);cy=np.mean([y for x,y in contour]);eye['roi']=[[float(cx+(x-cx)*1.48),float(cy+(y-cy)*1.7)] for x,y in contour]
+    apply_landmarks(r,data)
     save(p/'rig.json',r);save(p/'avatar.json',{'format':'mesh-avatar','version':1,'name':data.get('name','新形象'),'source':'source.png'})
     # A real independently stored head slice. Its lower edge is editable in the UI.
     neck=r['head']['pivotY'];ex=r['head']['cx'];rx=r['head']['rx']*1.2
@@ -198,6 +246,15 @@ if __name__=='__main__':
       elif cmd=='build':build(i);result={'ok':True}
       elif cmd=='export':result=export(i)
       elif cmd=='import':import_project(i,sys.argv[3]);result={'ok':True}
+      elif cmd=='psd-inspect':
+        import psd_import;result=psd_import.inspect(i)
+      elif cmd=='create-psd':
+        existed=project(i).exists()
+        try:create_psd(i,sys.argv[3],json.load(sys.stdin))
+        except Exception:
+          if not existed:shutil.rmtree(project(i),ignore_errors=True)
+          raise
+        result={'ok':True}
       else:raise ValueError('未知操作')
       print(json.dumps(result,ensure_ascii=False))
     except Exception as e:print(str(e),file=sys.stderr);sys.exit(1)
